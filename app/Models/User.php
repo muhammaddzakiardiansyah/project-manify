@@ -11,6 +11,14 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    protected $table = 'users';
+
+    // Specify the primary key type
+    protected $keyType = 'string';
+
+    // Disable auto-incrementing
+    public $incrementing = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,6 +28,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'photo',
     ];
 
     /**
@@ -43,5 +53,12 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public static function boot(): void
+    {
+        parent::boot();
+
+        static::creating(fn($model) => empty($model->id) ? $model->id = uniqid() : '');
     }
 }

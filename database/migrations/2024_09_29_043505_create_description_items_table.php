@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('description_items', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
             $table->string('item_name');
             $table->string('amount');
             $table->string('status');
             $table->date('date');
             $table->string('source_of_founds');
-            $table->unsignedBigInteger('author_id');
+            $table->string('author_id');
             $table->foreign('author_id')->references('id')->on('users');
             $table->timestamps();
         });

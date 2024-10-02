@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $page_title }}</title>
+    <title>Manify ● {{ $page_title }}</title>
 
 
 
@@ -22,7 +22,35 @@
 
 <body>
     <script src="{{ asset('assets/static/js/initTheme.js') }}"></script>
-    @yield('app')
+    <div id="app">
+        @include('components.sidebar')
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <h3>{{ $url }}</h3>
+            </div>
+            <div class="page-content">
+                @yield('app')
+            </div>
+
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>{{ date('Y') }} &copy; Mazer x codeauthentic</p>
+                    </div>
+                    <div class="float-end">
+                        <p>UI Crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
+                            by <a href="https://saugi.me">Saugi</a></p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
     <script src="{{ asset('assets/static/js/components/dark.js') }}"></script>
     <script src="{{ asset('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 

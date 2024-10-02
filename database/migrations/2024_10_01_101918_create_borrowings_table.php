@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('borrowings', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
             $table->string('item_name');
             $table->text('description');
             $table->date('date_borrow');
-            $table->unsignedBigInteger('borrowing_id');
+            $table->string('borrowing_id');
             $table->foreign('borrowing_id')->references('id')->on('users');
             $table->enum('status', ['borrowed', 'returned']);
             $table->string('person_responsibel');
