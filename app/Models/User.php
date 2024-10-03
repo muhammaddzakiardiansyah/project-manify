@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -60,5 +61,10 @@ class User extends Authenticatable
         parent::boot();
 
         static::creating(fn($model) => empty($model->id) ? $model->id = uniqid() : '');
+    }
+
+    public function allItem(): HasMany
+    {
+        return $this->hasMany(AllItem::class, 'author_id');
     }
 }

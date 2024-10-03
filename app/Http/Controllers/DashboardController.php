@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AllItem;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -17,7 +18,23 @@ class DashboardController extends Controller
 
     public function showAllItems()
     {
+        $allItems = AllItem::with('user')->paginate(10);
+
+        $search = request('search');
+        if($search) {
+            $allItems = AllItem::with('user')
+                        ->where('item_name', 'LIKE', "%{$search}%")
+                        ->orWhere('status', 'LIKE', "%{$search}%")
+                        ->orWhere('place', 'LIKE', "%{$search}%")
+                        ->orWhere('author_id', 'LIKE', "%{$search}%")
+                        ->whereHas('user', function($query) use ($search) {
+                            $query->where('name', 'LIKE', "%{$search}%");
+                        })
+                        ->paginate(10);
+        }
+
         return view('dashboard.all_items.index', [
+            'allItems' => $allItems,
             'page_title' => 'All Items',
             'url' => 'all-items',
             'active' => 'all-items',
