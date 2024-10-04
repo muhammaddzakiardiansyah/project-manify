@@ -1,7 +1,18 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+
+Route::prefix('login')->group(function() {
+    Route::get('/', [AuthController::class, 'showLogin']);
+    Route::post('/', [AuthController::class, 'login']);
+});
+
+Route::prefix('register')->group(function() {
+    Route::get('/', [AuthController::class, 'showRegister']);
+    Route::post('/', [AuthController::class, 'register']);
+});
 
 Route::prefix('dashboard')->group(function() {
     Route::get('/', [DashboardController::class, 'index']);

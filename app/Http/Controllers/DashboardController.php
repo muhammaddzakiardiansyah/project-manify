@@ -59,7 +59,7 @@ class DashboardController extends Controller
             'description' => ['required', 'min:10', 'max:200'],
         ]);
 
-        $rules['author_id'] = '66ff2d440f0fc';
+        $rules['author_id'] = '66fe95823c63d';
 
         AllItem::create($rules);
 

@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manify ● {{ $page_title }}</title>
-
+    <title>Login - Mazer Admin Dashboard</title>
 
 
     <link rel="shortcut icon" href="{{ asset('assets/compiled/svg/favicon.svg') }}" type="image/x-icon">
@@ -22,47 +21,53 @@
 
 <body>
     <script src="{{ asset('assets/static/js/initTheme.js') }}"></script>
-    <div id="app">
-        @include('components.sidebar')
-        <div id="main">
-            <header class="mb-3">
-                <a href="#" class="burger-btn d-block d-xl-none">
-                    <i class="bi bi-justify fs-3"></i>
-                </a>
-            </header>
+    <div id="auth">
 
-            <div class="page-heading">
-                <h3>{{ $url }}</h3>
-            </div>
-            <div class="page-content">
-                @yield('app')
-            </div>
-
-            <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-start">
-                        <p>{{ date('Y') }} &copy; Mazer x codeauthentic</p>
+        <div class="row h-100">
+            <div class="col-lg-5 col-12">
+                <div id="auth-left">
+                    <div class="auth-logo">
+                        <h1>Manify</h1>
                     </div>
-                    <div class="float-end">
-                        <p>UI Crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-                            by <a href="https://saugi.me">Saugi</a></p>
+                    <h1 class="auth-title">Log in.</h1>
+                    <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
+
+                    <form action="index.html">
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="text" class="form-control form-control-xl" placeholder="Username">
+                            <div class="form-control-icon">
+                                <i class="bi bi-person"></i>
+                            </div>
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="password" class="form-control form-control-xl" placeholder="Password">
+                            <div class="form-control-icon">
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
+                        </div>
+                        <div class="form-check form-check-lg d-flex align-items-end">
+                            <input class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label text-gray-600" for="flexCheckDefault">
+                                Keep me logged in
+                            </label>
+                        </div>
+                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
+                    </form>
+                    <div class="text-center mt-5 text-lg fs-4">
+                        <p class="text-gray-600">Don't have an account? <a href="/register"
+                                class="font-bold">Sign
+                                up</a>.</p>
                     </div>
                 </div>
-            </footer>
+            </div>
+            <div class="col-lg-7 d-none d-lg-block">
+                <div id="auth-right">
+
+                </div>
+            </div>
         </div>
+
     </div>
-    <script src="{{ asset('assets/static/js/components/dark.js') }}"></script>
-    <script src="{{ asset('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-
-
-    <script src="{{ asset('assets/compiled/js/app.js') }}"></script>
-
-
-
-    <!-- Need: Apexcharts -->
-    <script src="{{ asset('assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('assets/static/js/pages/dashboard.js') }}"></script>
-
 </body>
 
 </html>
