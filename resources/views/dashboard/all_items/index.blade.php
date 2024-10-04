@@ -3,6 +3,12 @@
 @section('app')
     <section class="section">
         <div class="row" id="basic-table">
+            @session('message')
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                {{ session('message') }}.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endsession
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Table All Items</h4>
@@ -15,8 +21,19 @@
                             </div>
                             <div class="search">
                                 <form action="" method="get" class="d-flex gap-2">
-                                    <input type="text" name="search" id="search" class="form-control"
+                                    <input list="searchs" name="search" id="search" class="form-control"
                                         placeholder="Search anyware...">
+                                    <datalist id="searchs">
+                                        <option value="Lab PPLG 1">
+                                        <option value="Lab PPLG 2">
+                                        <option value="Lab PPLG 3">
+                                        <option value="Lab PPLG 4">
+                                        <option value="Toolman">
+                                        <option value="active">
+                                        <option value="broken">
+                                        <option value="mainten">
+                                        <option value="stock">
+                                    </datalist>
                                     <button class="btn btn-primary"><i class="bi bi-search"></i></button>
                                 </form>
                             </div>

@@ -8,11 +8,12 @@ Route::prefix('dashboard')->group(function() {
     Route::prefix('all-items')->group(function() {
         Route::get('/', [DashboardController::class, 'showAllItems']);
         Route::get('/create', [DashboardController::class, 'showCreateItem']);
-        Route::get('/edit', [DashboardController::class, 'showEditItem']);
+        Route::post('/create', [DashboardController::class, 'createItem']);
+        Route::get('/edit/{id}', [DashboardController::class, 'showEditItem']);
     });
     Route::prefix('description-items')->group(function() {
         Route::get('/', [DashboardController::class, 'showDescriptionItems']);
         Route::get('/create', [DashboardController::class, 'showCreateDescriptionItem']);
-        Route::get('/edit', [DashboardController::class, 'showEditDescriptionItem']);
+        Route::get('/edit/{id}', [DashboardController::class, 'showEditDescriptionItem']);
     });
 });

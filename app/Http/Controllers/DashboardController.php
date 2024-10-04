@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\AllItem;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class DashboardController extends Controller
 {
@@ -21,16 +23,13 @@ class DashboardController extends Controller
         $allItems = AllItem::with('user')->paginate(10);
 
         $search = request('search');
-        if($search) {
+        if ($search) {
             $allItems = AllItem::with('user')
-                        ->where('item_name', 'LIKE', "%{$search}%")
-                        ->orWhere('status', 'LIKE', "%{$search}%")
-                        ->orWhere('place', 'LIKE', "%{$search}%")
-                        ->orWhere('author_id', 'LIKE', "%{$search}%")
-                        ->whereHas('user', function($query) use ($search) {
-                            $query->where('name', 'LIKE', "%{$search}%");
-                        })
-                        ->paginate(10);
+                ->where('item_name', 'LIKE', "%{$search}%")
+                ->orWhere('status', 'LIKE', "%{$search}%")
+                ->orWhere('place', 'LIKE', "%{$search}%")
+                ->orWhere('description', 'LIKE', "%{$search}%")
+                ->paginate(10);
         }
 
         return view('dashboard.all_items.index', [
@@ -50,9 +49,29 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function showEditItem()
+    public function createItem(Request $request): RedirectResponse
     {
+        $rules = $request->validate([
+            'item_name' => ['required', 'min:3', 'max:20'],
+            'amount' => ['required'],
+            'status' => ['required'],
+            'place' => ['required'],
+            'description' => ['required', 'min:10', 'max:200'],
+        ]);
+
+        $rules['author_id'] = '66ff2d440f0fc';
+
+        AllItem::create($rules);
+
+        return redirect('/dashboard/all-items')->with('message', 'Item Success created!');
+    }
+
+    public function showEditItem(string $id)
+    {
+        $item = AllItem::find($id);
+
         return view('dashboard.all_items.edit', [
+            'item' => $item,
             'page_title' => 'Edit Item',
             'url' => 'all-items/edit',
             'active' => 'all-items',
