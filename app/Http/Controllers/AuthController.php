@@ -9,8 +9,19 @@ class AuthController extends Controller
 {
     public function showLogin(): View
     {
-        return view('auth.login', [
-            'page_title' => 'Login',
+        return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        $rules = $request->validate([
+            'name' => ['required'],
+            'password' => ['required'],
         ]);
+    }
+
+    public function showRegister(): View
+    {
+        return view('auth.register');
     }
 }
