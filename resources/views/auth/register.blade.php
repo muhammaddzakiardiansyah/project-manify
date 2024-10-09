@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Mazer Admin Dashboard</title>
+    <title>Register</title>
 
 
     <link rel="shortcut icon" href="{{ asset('assets/compiled/svg/favicon.svg') }}" type="image/x-icon">
@@ -32,32 +32,79 @@
                     <h1 class="auth-title">Sign Up</h1>
                     <p class="auth-subtitle mb-5">Input your data to register to our website.</p>
 
-                    <form action="index.html">
+                    <form action="/register" method="POST">
+                        @csrf
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="Email">
+                            <input type="text"
+                                class="form-control form-control-xl @error('email') is-invalid @enderror" name="email"
+                                placeholder="Email"
+                                value="{{ old('email') }}">
                             <div class="form-control-icon">
                                 <i class="bi bi-envelope"></i>
                             </div>
+                            @error('email')
+                                <div class="invalid-feedback">
+                                    <i class="bx bx-radio-circle"></i>
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="Username">
+                            <input type="text"
+                                class="form-control form-control-xl @error('name') is-invalid @enderror" name="name"
+                                placeholder="Name"
+                                value="{{ old('name') }}">
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    <i class="bx bx-radio-circle"></i>
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" class="form-control form-control-xl" placeholder="Password">
+                            <input type="password"
+                                class="form-control form-control-xl @error('password') is-invalid @enderror"
+                                name="password" placeholder="Password" id="column-password" value="{{ old('password') }}">
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
+                            @error('password')
+                                <div class="invalid-feedback">
+                                    <i class="bx bx-radio-circle"></i>
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <div class="mt-3 form-check form-check-lg d-flex align-items-end">
+                                <input class="form-check-input me-2" type="checkbox"  id="password">
+                                <label class="form-check-label text-gray-600" for="password">
+                                    See password
+                                </label>
+                            </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" class="form-control form-control-xl" placeholder="Confirm Password">
+                            <input type="password"
+                                class="form-control form-control-xl @error('confirm_password') is-invalid @enderror"
+                                name="confirm_password" id="column-confirm-password" placeholder="Confirm Password" value="{{ old('confirm_password') }}">
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
+                            @error('confirm_password')
+                                <div class="invalid-feedback">
+                                    <i class="bx bx-radio-circle"></i>
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <div class="mt-3 form-check form-check-lg d-flex align-items-end">
+                                <input class="form-check-input me-2" type="checkbox"  id="confirm_password">
+                                <label class="form-check-label text-gray-600" for="confirm_password">
+                                    See confirm password
+                                </label>
+                            </div>
                         </div>
-                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Sign Up</button>
+                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5" type="submit">Sign Up</button>
                     </form>
                     <div class="text-center mt-5 text-lg fs-4">
                         <p class='text-gray-600'>Already have an account? <a href="/login" class="font-bold">Log
@@ -73,6 +120,21 @@
         </div>
 
     </div>
+
+    <script>
+        // password
+        const togglePassword = document.getElementById('password')
+        const inputPassword = document.getElementById('column-password')
+        togglePassword.addEventListener('change', () => {
+            inputPassword.getAttribute('type') == 'password' ? inputPassword.setAttribute('type', 'text') : inputPassword.setAttribute('type', 'password')
+        })
+        // confirm password
+        const toggleConfirmPassword = document.getElementById('confirm_password')
+        const inputConfirmPassword = document.getElementById('column-confirm-password')
+        toggleConfirmPassword.addEventListener('change', () => {
+            inputConfirmPassword.getAttribute('type') == 'password' ? inputConfirmPassword.setAttribute('type', 'text') : inputConfirmPassword.setAttribute('type', 'password')
+        })
+    </script>
 </body>
 
 </html>
