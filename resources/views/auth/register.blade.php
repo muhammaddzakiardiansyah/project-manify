@@ -67,7 +67,7 @@
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="password"
                                 class="form-control form-control-xl @error('password') is-invalid @enderror"
-                                name="password" placeholder="Password" id="column-password" value="{{ old('password') }}">
+                                name="password" placeholder="Password" id="column-password">
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
@@ -87,7 +87,7 @@
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="password"
                                 class="form-control form-control-xl @error('confirm_password') is-invalid @enderror"
-                                name="confirm_password" id="column-confirm-password" placeholder="Confirm Password" value="{{ old('confirm_password') }}">
+                                name="confirm_password" id="column-confirm-password" placeholder="Confirm Password">
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>

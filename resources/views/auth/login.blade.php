@@ -22,26 +22,31 @@
 <body>
     <script src="{{ asset('assets/static/js/initTheme.js') }}"></script>
     <div id="auth">
-
         <div class="row h-100">
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
                     <div class="auth-logo">
                         <h1>Manify</h1>
                     </div>
+                    @session('message')
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            {{ session('message') }}.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endsession
                     <h1 class="auth-title">Log in.</h1>
                     <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
 
-                    <form action="/login" method="POST">
+                    <form action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text"
-                                class="form-control form-control-xl @error('name') is-invalid @enderror" name="name"
-                                placeholder="Name">
+                            <input type="email"
+                                class="form-control form-control-xl @error('email') is-invalid @enderror" name="email"
+                                placeholder="Email">
                             <div class="form-control-icon">
-                                <i class="bi bi-person"></i>
+                                <i class="bi bi-envelope"></i>
                             </div>
-                            @error('name')
+                            @error('email')
                                 <div class="invalid-feedback">
                                     <i class="bx bx-radio-circle"></i>
                                     {{ $message }}
@@ -51,8 +56,7 @@
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="password" name="password"
                                 class="form-control form-control-xl @error('password') is-invalid @enderror"
-                                id="column-password"
-                                placeholder="Password">
+                                id="column-password" placeholder="Password">
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
